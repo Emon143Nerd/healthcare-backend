@@ -1,0 +1,31 @@
+// {
+//   "compilerOptions": {
+//     "target": "ES2022",                          /* Specify ECMAScript target version */
+//     "module": "NodeNext",                        /* Specify module code generation */
+//     "moduleResolution": "NodeNext",              /* Resolve modules using modern Node logic */
+//     "rootDir": "./src",                          /* Specify the root directory of input files */
+//     "outDir": "./dist",                          /* Redirect output structure to the directory */
+//     "esModuleInterop": true,                     /* Emit additional JavaScript to ease importing CommonJS modules */
+//     "forceConsistentCasingInFileNames": true,    /* Ensure that casing is correct in imports */
+//     "strict": true,                              /* Enable all strict type-checking options */
+//     "skipLibCheck": true                         /* Skip type checking of declaration files (.d.ts) */
+//   },
+//   "include": ["src/**/*"],                       /* Compile everything inside the src folder */
+//   "exclude": ["node_modules", "dist", "**/*.spec.ts"] /* Exclude third-party code and build assets */
+// }
+
+{
+  "compilerOptions": {
+    "module": "ESNext",
+    "rootDir": "./src",                          /* Specify the root directory of input files */
+    "outDir": "./dist",  
+    "moduleResolution": "bundler",
+    "target": "ES2023",
+    "strict": true,
+    "esModuleInterop": true,
+    "ignoreDeprecations": "6.0"
+  },
+  "types": ["node"],
+  "include": ["src"],
+  "exclude": ["node_modules","dist"]
+}

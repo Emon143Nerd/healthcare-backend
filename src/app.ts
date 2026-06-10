@@ -1,0 +1,36 @@
+import express, { Application, Request, Response } from "express";
+import cors from "cors";
+import { IndexRoutes } from "./app/routes";
+import { globalErrorHandler } from "./app/middlewares/globalErrorHandler";
+import { notFound } from "./app/middlewares/notFound";
+import cookieParser from "cookie-parser";
+
+const app: Application = express();
+
+// 💡 NEW: Enable Cross-Origin Resource Sharing so your future React frontend can communicate with this API
+app.use(cors());
+
+// Enable URL-encoded form data parsing
+app.use(express.urlencoded({ extended: true }));
+
+// Middleware to parse JSON bodies
+app.use(express.json());
+app.use(cookieParser());
+
+// Main Application API Routing Setup
+app.use("/api/v1", IndexRoutes);
+
+// 💡 REFACTORED: Clean, standard health check route (bypassing database clutter)
+app.get('/', (req: Request, res: Response) => {
+  res.status(200).json({
+    success: true,
+    message: '🏥 Hospital Management System API Server running smoothly...'
+  });
+});
+
+// 🚨 CRITICAL: Global Error Interceptor Boundary Protection Layers
+// These must sit at the absolute bottom, after all of your routes!
+app.use(globalErrorHandler);
+app.use(notFound);
+
+export default app;
