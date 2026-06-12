@@ -10,8 +10,8 @@ router.post("/register", authController.registerPatient);
 router.post("/login", authController.loginUser);
 router.get("/me",checkAuth(Role.ADMIN,Role.SUPER_ADMIN, Role.DOCTOR, Role.PATIENT), authController.getMe);
 router.post("/refresh-token", authController.getNewToken)
-// router.post("/change-password", checkAuth(Role.ADMIN, Role.DOCTOR, Role.PATIENT, Role.SUPER_ADMIN), AuthController.changePassword)
-// router.post("/logout", checkAuth(Role.ADMIN, Role.DOCTOR, Role.PATIENT, Role.SUPER_ADMIN), AuthController.logoutUser)
+router.post("/change-password", checkAuth(Role.ADMIN, Role.DOCTOR, Role.PATIENT, Role.SUPER_ADMIN), authController.changePassword)
+router.post("/logout", checkAuth(Role.ADMIN, Role.DOCTOR, Role.PATIENT, Role.SUPER_ADMIN), authController.logoutUser)
 // router.post("/verify-email", authController.verifyEmail)
 // router.post("/forget-password", authController.forgetPassword)
 // router.post("/reset-password", authController.resetPassword)
