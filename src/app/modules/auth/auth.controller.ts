@@ -145,44 +145,44 @@ const logoutUser = catchAsync(
     }
 )
 
-// const verifyEmail = catchAsync(
-//     async (req: Request, res: Response) => {
-//         const { email, otp } = req.body;
-//         await AuthService.verifyEmail(email, otp);
+const verifyEmail = catchAsync(
+    async (req: Request, res: Response) => {
+        const { email, otp } = req.body;
+        await authService.verifyEmail(email, otp);
 
-//         sendResponse(res, {
-//             httpStatusCode: status.OK,
-//             success: true,
-//             message: "Email verified successfully",
-//         });
-//     }
-// )
+        sendResponse(res, {
+            httpStatusCode: status.OK,
+            success: true,
+            message: "Email verified successfully",
+        });
+    }
+)
 
-// const forgetPassword = catchAsync(
-//     async (req: Request, res: Response) => {
-//         const { email } = req.body;
-//         await AuthService.forgetPassword(email);
+const forgetPassword = catchAsync(
+    async (req: Request, res: Response) => {
+        const { email } = req.body;
+        await authService.forgetPassword(email);
 
-//         sendResponse(res, {
-//             httpStatusCode: status.OK,
-//             success: true,
-//             message: "Password reset OTP sent to email successfully",
-//         });
-//     }
-// )
+        sendResponse(res, {
+            httpStatusCode: status.OK,
+            success: true,
+            message: "Password reset OTP sent to email successfully",
+        });
+    }
+)
 
-// const resetPassword = catchAsync(
-//     async (req: Request, res: Response) => {
-//         const { email, otp, newPassword } = req.body;
-//         await AuthService.resetPassword(email, otp, newPassword);
+const resetPassword = catchAsync(
+    async (req: Request, res: Response) => {
+        const { email, otp, newPassword } = req.body;
+        await authService.resetPassword(email, otp, newPassword);
 
-//         sendResponse(res, {
-//             httpStatusCode: status.OK,
-//             success: true,
-//             message: "Password reset successfully",
-//         });
-//     }
-// )
+        sendResponse(res, {
+            httpStatusCode: status.OK,
+            success: true,
+            message: "Password reset successfully",
+        });
+    }
+)
 
 export const authController = {
     registerPatient,
@@ -190,5 +190,8 @@ export const authController = {
     getMe,
     getNewToken,
     logoutUser,
-    changePassword 
+    changePassword,
+    verifyEmail,
+    forgetPassword,
+    resetPassword
 };
