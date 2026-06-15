@@ -186,6 +186,8 @@ const resetPassword = catchAsync(
     }
 )
 
+//* api/v1/auth/login/google?redirect=/profile
+
 const googleLogin = catchAsync((req: Request, res: Response) => {
     const redirectPath = req.query.redirect || "/dashboard";
 
