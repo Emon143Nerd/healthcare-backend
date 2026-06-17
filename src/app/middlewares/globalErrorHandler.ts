@@ -4,11 +4,13 @@ import status from "http-status";
 import z from "zod";
 import { handleZodError } from "../errorHelpers/handleZodError";  // Assuming this is where your helper lives
 import { TErrorResponse, TErrorSources } from "../interfaces/error.interface";
+import { deleteFileFromCloudinary } from "../config/cloudinary.config";
 
 
 
-export const globalErrorHandler = (
-    err: any, // Fixed: Kept as 'any' so it safely accommodates ZodErrors, AppErrors, database crashes etc.
+export const globalErrorHandler = async(
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    err: any, 
     req: Request, 
     res: Response, 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -16,6 +18,15 @@ export const globalErrorHandler = (
 ) => {
     if (envVars.NODE_ENV === "development") {
         console.error("Error: ", err);
+    }
+
+    if(req.file){
+        await deleteFileFromCloudinary(req.file.path)
+    }
+
+    if(req.files && Array.isArray(req.files) && req.files.length > 0){
+        const imageUrls = req.files.map((file) => file.path);
+        await Promise.all(imageUrls.map(url => deleteFileFromCloudinary(url))); 
     }
 
     let errorSources: TErrorSources[] = [];

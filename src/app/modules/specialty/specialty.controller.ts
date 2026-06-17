@@ -7,19 +7,23 @@ import { sendResponse } from "../../shared/sendResponse";
 
 
 // 1. Create Specialty
-const createSpecialty = catchAsync(async (req: Request, res: Response) => {
-  const payload = req.body;
-  const result = await SpecialtyService.createSpecialty(payload);
-
-  sendResponse(res, {
-    httpStatusCode: 201,
-    success: true,
-    message: "Specialty created successfully!",
-    data: result
-  });
-
-});
-
+const createSpecialty = catchAsync(
+    async (req: Request, res: Response) => {
+        console.log(req.body);
+        console.log(req.file);
+        const payload = {
+            ...req.body,
+            icon : req.file?.path
+        };
+        const result = await SpecialtyService.createSpecialty(payload);
+        sendResponse(res, {
+            httpStatusCode: 201,
+            success: true,
+            message: 'Specialty created successfully',
+            data: result
+        });
+    }
+)
 // 2. Get All Specialties
 const getAllSpecialties = catchAsync(async (req: Request, res: Response) => {
   const result = await SpecialtyService.getAllSpecialties();

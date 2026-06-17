@@ -3,6 +3,10 @@ import { z } from 'zod'; // Use this if your Zod version supports it, or use z.A
 
 export const validateRequest = (zodSchema: z.ZodObject) => {
     return (req: Request, res: Response, next: NextFunction) => {
+
+        if(req.body.data){
+            req.body = JSON.parse(req.body.data)
+        }
         const parsedResult = zodSchema.safeParse(req.body);
 
         if (!parsedResult.success) {
