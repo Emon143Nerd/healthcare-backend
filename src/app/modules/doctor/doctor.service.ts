@@ -9,23 +9,24 @@ import { doctorFilterableFields, doctorIncludeConfig, doctorSearchableFields } f
 import { Doctor, Prisma } from "../../../generated/prisma/client";
 
 
-//*  use query builder
-//* 
-const getAllDoctors = async (query: IQueryParams) => {
+//*  use query builder 
+const getAllDoctors = async (query : IQueryParams) => {
     // const doctors = await prisma.doctor.findMany({
     //     where: {
-    //          isDeleted: false
-    //         },
+    //         isDeleted: false,
+    //     },
     //     include: {
     //         user: true,
     //         specialties: {
     //             include: {
-    //                 specialty:true
+    //                 specialty: true
     //             }
     //         }
     //     }
     // })
-    // return doctors
+
+    // // const query = new QueryBuilder().paginate().search().filter();
+    // return doctors;
 
     const queryBuilder = new QueryBuilder<Doctor, Prisma.DoctorWhereInput, Prisma.DoctorInclude>(
         prisma.doctor,
@@ -60,6 +61,7 @@ const getAllDoctors = async (query: IQueryParams) => {
         console.log(result);
     return result;
 }
+
 
 const getDoctorById = async (id: string) => {
     return await prisma.doctor.findUniqueOrThrow({

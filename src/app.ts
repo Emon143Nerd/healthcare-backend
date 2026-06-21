@@ -8,8 +8,11 @@ import { IndexRoutes } from "./app/routes";
 import { globalErrorHandler } from "./app/middlewares/globalErrorHandler";
 import { notFound } from "./app/middlewares/notFound";
 import { envVars } from "./app/config/env";
+import qs from "qs"
 
 const app: Application = express();
+
+app.set("query parser", (str: string)=> qs.parse(str))
 
 // 1. Security & CORS (Must be first to allow handshake)
 app.use(cors({

@@ -7,7 +7,7 @@ const router = Router();
 
 // Routes that do not require an ID
 router.get("/",
-    checkAuth(Role.ADMIN,Role.SUPER_ADMIN,Role.PATIENT),
+    // checkAuth(Role.ADMIN,Role.SUPER_ADMIN,Role.PATIENT),
     doctorController.getAllDoctors);
 
 // Routes that require an ID, chained for cleanliness
