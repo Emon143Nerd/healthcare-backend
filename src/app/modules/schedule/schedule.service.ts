@@ -8,9 +8,10 @@ import { ICreateSchedulePayload, IUpdateSchedulePayload } from "./schedule.inter
 import { scheduleFilterableFields, scheduleIncludeConfig, scheduleSearchableFields } from "./schedule.constant";
 
 const createSchedule = async (payload: ICreateSchedulePayload) =>{
+
     const { startDate, endDate, startTime, endTime } = payload;
 
-    const interval = 30;
+    const interval = 30; //* length of each schedule
 
     const currentDate = new Date(startDate);
     const lastDate = new Date(endDate);
